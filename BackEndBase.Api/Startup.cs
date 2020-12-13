@@ -43,7 +43,7 @@ namespace BackEndBase.Api
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHttpContextAccessor accessor)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHttpContextAccessor accessor, BaseContext dataContext)
         {
             if (env.IsDevelopment())
             {
@@ -51,6 +51,8 @@ namespace BackEndBase.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BackEndBase.Api v1"));
             }
+            
+            dataContext.Database.Migrate();
 
             app.UseHttpsRedirection();
 
