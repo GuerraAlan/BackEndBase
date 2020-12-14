@@ -15,14 +15,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BackendBase.Anticorruption.AutoMapper\BackEndBase.Anticorruption.AutoMapper.csproj" />
+    <ProjectReference Include="..\BackEndBase.Anticorruption.AutoMapper\BackEndBase.Anticorruption.AutoMapper.csproj" />
     <ProjectReference Include="..\BackEndBase.Application\BackEndBase.Application.csproj" />
-    <ProjectReference Include="..\BackendBase.DataAccess\BackendBase.DataAccess.csproj" />
+    <ProjectReference Include="..\BackEndBase.DataAccess\BackEndBase.DataAccess.csproj" />
     <ProjectReference Include="..\BackEndBase.Domain\BackEndBase.Domain.csproj" />
     <ProjectReference Include="..\BackEndBase.Infra.CrossCutting.IoC\BackEndBase.Infra.CrossCutting.IoC.csproj" />
   </ItemGroup>

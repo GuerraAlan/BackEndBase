@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BackendBase.DataAccess.Mappings
+namespace BackEndBase.DataAccess.Mappings
 {
     internal class UserMap : IEntityTypeConfiguration<User>
     {

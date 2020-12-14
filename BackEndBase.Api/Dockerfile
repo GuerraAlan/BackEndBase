@@ -8,6 +8,12 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["BackEndBase.Api/BackEndBase.Api.csproj", "BackEndBase.Api/"]
+COPY ["BackEndBase.Domain/BackEndBase.Domain.csproj", "BackEndBase.Domain/"]
+COPY ["BackEndBase.Infra.CrossCutting.IoC/BackEndBase.Infra.CrossCutting.IoC.csproj", "BackEndBase.Infra.CrossCutting.IoC/"]
+COPY ["BackEndBase.Application/BackEndBase.Application.csproj", "BackEndBase.Application/"]
+COPY ["BackEndBase.Infra.CrossCutting.Bus/BackEndBase.Infra.CrossCutting.Bus.csproj", "BackEndBase.Infra.CrossCutting.Bus/"]
+COPY ["BackEndBase.DataAccess/BackEndBase.DataAccess.csproj", "BackEndBase.DataAccess/"]
+COPY ["BackEndBase.Anticorruption.AutoMapper/BackEndBase.Anticorruption.AutoMapper.csproj", "BackEndBase.Anticorruption.AutoMapper/"]
 RUN dotnet restore "BackEndBase.Api/BackEndBase.Api.csproj"
 COPY . .
 WORKDIR "/src/BackEndBase.Api"

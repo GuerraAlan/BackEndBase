@@ -1,5 +1,5 @@
-﻿using BackendBase.DataAccess.Context;
-using BackendBase.DataAccess.Repositories;
+﻿using BackEndBase.DataAccess.Context;
+using BackEndBase.DataAccess.Repositories;
 using BackEndBase.Application.Concretes;
 using BackEndBase.Application.Interfaces;
 using BackEndBase.Domain.Bus;
