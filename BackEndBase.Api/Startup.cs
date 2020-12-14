@@ -34,7 +34,7 @@ namespace BackEndBase.Api
 
             services.AddDbContext<BaseContext>(options =>
                 {
-                    options.UseNpgsql("Host=postgres;Database=postgres;Username=postgres;Password=Senha1234");
+                    options.UseNpgsql(connectionString);
                 }
             );
 
