@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using BackEndBase.Anticorruption.AutoMapper;
 using BackEndBase.DataAccess.Context;
@@ -28,10 +29,12 @@ namespace BackEndBase.Api
             services.AddControllers();
 
             services.AddAutoMapper(typeof(AutoMapperSetup));
+            
+            var connectionString = Environment.GetEnvironmentVariable("ConnectionString") ?? Configuration.GetConnectionString("NpgSqlConnectionString");
 
             services.AddDbContext<BaseContext>(options =>
                 {
-                    options.UseNpgsql(Configuration.GetConnectionString("NpgSqlConnectionString"));
+                    options.UseNpgsql("Host=postgres;Database=postgres;Username=postgres;Password=Senha1234");
                 }
             );
 
@@ -45,17 +48,16 @@ namespace BackEndBase.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHttpContextAccessor accessor, BaseContext dataContext)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BackEndBase.Api v1"));
-            }
+            
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BackEndBase.Api v1"));
+            
 
             dataContext.Database.Migrate();
 
             app.UseHttpsRedirection();
-
+            
             app.UseRouting();
 
             app.UseAuthorization();
