@@ -1,6 +1,6 @@
 using AutoMapper;
-using BackendBase.DataAccess.Context;
 using BackEndBase.Anticorruption.AutoMapper;
+using BackEndBase.DataAccess.Context;
 using BackEndBase.Infra.CrossCutting.Bus;
 using BackEndBase.Infra.CrossCutting.IoC;
 using Microsoft.AspNetCore.Builder;
@@ -51,7 +51,7 @@ namespace BackEndBase.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BackEndBase.Api v1"));
             }
-            
+
             dataContext.Database.Migrate();
 
             app.UseHttpsRedirection();

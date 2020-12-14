@@ -1,18 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace BackendBase.DataAccess.Migrations
+namespace BackEndBase.DataAccess.Migrations
 {
     public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "BackendBase");
+                name: "BackEndBase");
 
             migrationBuilder.CreateTable(
                 name: "tb_user",
-                schema: "BackendBase",
+                schema: "BackEndBase",
                 columns: table => new
                 {
                     id_user = table.Column<Guid>(type: "uuid", nullable: false),
@@ -33,7 +33,7 @@ namespace BackendBase.DataAccess.Migrations
         {
             migrationBuilder.DropTable(
                 name: "tb_user",
-                schema: "BackendBase");
+                schema: "BackEndBase");
         }
     }
 }

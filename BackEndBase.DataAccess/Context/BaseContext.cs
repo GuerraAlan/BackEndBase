@@ -1,8 +1,8 @@
-﻿using BackendBase.DataAccess.Mappings;
+﻿using BackEndBase.DataAccess.Mappings;
 using BackEndBase.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackendBase.DataAccess.Context
+namespace BackEndBase.DataAccess.Context
 {
     public class BaseContext : DbContext
     {
@@ -14,7 +14,7 @@ namespace BackendBase.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("BackendBase");
+            modelBuilder.HasDefaultSchema("BackEndBase");
             modelBuilder.ApplyConfiguration(new UserMap());
         }
     }

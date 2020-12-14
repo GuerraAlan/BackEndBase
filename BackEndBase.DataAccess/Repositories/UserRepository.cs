@@ -1,9 +1,9 @@
-﻿using BackendBase.DataAccess.Context;
-using BackendBase.DataAccess.Repositories.Base;
+﻿using BackEndBase.DataAccess.Context;
+using BackEndBase.DataAccess.Repositories.Base;
 using BackEndBase.Domain.Entities;
 using BackEndBase.Domain.Interfaces.Data;
 
-namespace BackendBase.DataAccess.Repositories
+namespace BackEndBase.DataAccess.Repositories
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
