@@ -25,7 +25,7 @@ namespace BackEndBase.Domain.CommandHandlers
 
             if (existingUser != null)
             {
-                NotifyValidationError("Usuário já cadastrado.");
+                NotifyValidationError("Existing User");
                 return;
             }
 

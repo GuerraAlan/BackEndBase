@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace BackEndBase.Application.ViewModel.User
+namespace BackEndBase.Application.ViewModel.Request.User
 {
     public class RegisterUserViewModel
     {

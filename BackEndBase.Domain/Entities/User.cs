@@ -5,14 +5,14 @@ namespace BackEndBase.Domain.Entities
 {
     public class User : Entity<User>
     {
-        public string Name { get; set; }
+        public string Name { get; init; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; init; }
 
-        public string Phone { get; set; }
+        public string Phone { get; init; }
 
-        public string Email { get; set; }
+        public string Email { get; init; }
 
-        public string PasswordHash { get; set; }
+        public string PasswordHash { get; init; }
     }
 }
