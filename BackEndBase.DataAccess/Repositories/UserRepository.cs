@@ -16,9 +16,14 @@ namespace BackEndBase.DataAccess.Repositories
             DbSet().Add(user);
         }
 
-        public User GetUserByEmail(string messageEmail)
+        public User GetUserByEmail(string email)
         {
-            return Get(u => u.Email.ToLower().Equals(messageEmail.ToLower()));
+            return Get(u => u.Email.ToLower().Equals(email.ToLower()));
+        }
+
+        public User Get(string email, string password)
+        {
+            return Get(u => u.Email == email && u.PasswordHash == password);
         }
     }
 }

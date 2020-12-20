@@ -1,5 +1,15 @@
 version: '3.9'
 services:
+  postgres:
+    ports:
+      - '5432:5432'
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=Senha1234
+    image: 'postgres'
+    networks:
+      - database-network
+
   web:
     container_name: 'api'
     image: 'backendbase'
@@ -8,20 +18,13 @@ services:
       dockerfile: ./BackEndBase.Api/Dockerfile
     ports:
       - '80:80'
+      - '443:443'
+    environment:
+      - ConnectionString=Host=postgres;Database=postgres;Username=postgres;Password=Senha1234
     depends_on:
       - 'postgres'
     networks:
-      - database-network  
-
-  postgres:
-    ports:
-      - '5432:5432'
-    container_name: postgresql-db
-    environment:
-      - POSTGRES_PASSWORD=Senha1234
-    image: 'postgres'
-    networks:
-      - database-network
+      - database-network    
 
 networks:
   database-network:

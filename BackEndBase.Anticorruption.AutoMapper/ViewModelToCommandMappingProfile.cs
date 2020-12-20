@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BackEndBase.Application.ViewModel.User;
+using BackEndBase.Application.ViewModel.Request.User;
 using BackEndBase.Domain.Commands;
 
 namespace BackEndBase.Anticorruption.AutoMapper
