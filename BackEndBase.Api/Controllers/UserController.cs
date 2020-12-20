@@ -11,11 +11,11 @@ namespace BackEndBase.Api.Controllers
     [Route("api/v1/User")]
     public class UserController : BaseController
     {
-        private readonly IUserApplication _userApplcation;
+        private readonly IUserApplication _userApplication;
 
-        public UserController(IBus bus, IDomainNotificationHandler<DomainNotification> notifications, IUserApplication userApplcation) : base(bus, notifications)
+        public UserController(IBus bus, IDomainNotificationHandler<DomainNotification> notifications, IUserApplication userApplication) : base(bus, notifications)
         {
-            _userApplcation = userApplcation;
+            _userApplication = userApplication;
         }
 
         [HttpPost]
@@ -27,7 +27,7 @@ namespace BackEndBase.Api.Controllers
                 return Response();
             }
 
-            _userApplcation.AddUser(usuarioViewModel);
+            _userApplication.AddUser(usuarioViewModel);
 
             return Response(true);
         }
@@ -42,7 +42,7 @@ namespace BackEndBase.Api.Controllers
                 return Response();
             }
 
-            var userToken = _userApplcation.Authenticate(model);
+            var userToken = _userApplication.Authenticate(model);
 
             return Response(userToken);
         }
