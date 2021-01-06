@@ -23,7 +23,7 @@ namespace BackEndBase.DataAccess.Repositories
 
         public User Get(string email, string password)
         {
-            return Get(u => u.Email == email && u.PasswordHash == password);
+            return Get(u => u.Email.ToLower().Equals(email.ToLower()) && u.PasswordHash == password);
         }
     }
 }
