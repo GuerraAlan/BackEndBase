@@ -45,10 +45,6 @@ namespace BackEndBase.DataAccess.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("nm_user");
 
-                    b.Property<double?>("Nota")
-                        .HasColumnType("double precision")
-                        .HasColumnName("nm_nota");
-
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("text")
