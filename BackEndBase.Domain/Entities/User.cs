@@ -14,7 +14,5 @@ namespace BackEndBase.Domain.Entities
         public string Email { get; init; }
 
         public string PasswordHash { get; init; }
-
-        public double? Nota { get; init; }
     }
 }
