@@ -34,10 +34,6 @@ namespace BackEndBase.DataAccess.Mappings
             entity.Property(e => e.PasswordHash)
                 .IsRequired()
                 .HasColumnName("hs_password");
-
-            entity.Property(e => e.Nota)
-                .IsRequired(false)
-                .HasColumnName("nm_nota");
         }
     }
 }
