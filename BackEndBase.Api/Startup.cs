@@ -1,6 +1,4 @@
 using System;
-using AutoMapper;
-using BackEndBase.Anticorruption.AutoMapper;
 using BackEndBase.DataAccess.Context;
 using BackEndBase.Infra.CrossCutting.Bus;
 using BackEndBase.Infra.CrossCutting.IoC;
@@ -29,8 +27,6 @@ namespace BackEndBase.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            services.AddAutoMapper(typeof(AutoMapperSetup));
             
             var connectionString = Environment.GetEnvironmentVariable("ConnectionString") ?? Configuration.GetConnectionString("NpgSqlConnectionString");
 
