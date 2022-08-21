@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BackEndBase.Domain.Bus;
+﻿using BackEndBase.Domain.Bus;
 using BackEndBase.Domain.Notifications;
 using FluentValidation.Results;
 using System;
@@ -9,12 +8,10 @@ namespace BackEndBase.Domain.CommandHandlers.Base
 {
     public abstract class CommandHandler
     {
-        protected readonly IMapper Mapper;
         private readonly IBus _bus;
 
-        protected CommandHandler(IMapper mapper, IBus bus)
+        protected CommandHandler(IBus bus)
         {
-            Mapper = mapper;
             _bus = bus;
         }
 

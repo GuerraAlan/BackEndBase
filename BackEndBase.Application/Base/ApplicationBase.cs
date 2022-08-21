@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BackEndBase.Application.Interfaces;
+﻿using BackEndBase.Application.Interfaces;
 using BackEndBase.Domain.Bus;
 using BackEndBase.Domain.Commands.Base;
 
@@ -7,12 +6,10 @@ namespace BackEndBase.Application.Base
 {
     public abstract class ApplicationBase : IApplication
     {
-        protected readonly IMapper Mapper;
         private readonly IBus _bus;
 
-        protected ApplicationBase(IMapper mapper, IBus bus)
+        protected ApplicationBase(IBus bus)
         {
-            Mapper = mapper;
             _bus = bus;
         }
 
