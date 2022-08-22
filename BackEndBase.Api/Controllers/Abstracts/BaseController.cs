@@ -3,54 +3,52 @@ using BackEndBase.Domain.Bus;
 using BackEndBase.Domain.Interfaces.Notifications;
 using BackEndBase.Domain.Notifications;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 
-namespace BackEndBase.Api.Controllers.Abstracts
+namespace BackEndBase.Api.Controllers.Abstracts;
+
+public class BaseController : Controller
 {
-    public class BaseController : Controller
+    protected readonly IDomainNotificationHandler<DomainNotification> Notifications;
+    protected readonly IBus Bus;
+
+    public BaseController(IBus bus, IDomainNotificationHandler<DomainNotification> notifications)
     {
-        protected readonly IDomainNotificationHandler<DomainNotification> Notifications;
-        protected readonly IBus Bus;
+        Bus = bus;
+        Notifications = notifications;
+    }
 
-        public BaseController(IBus bus, IDomainNotificationHandler<DomainNotification> notifications)
+    protected void InvalidViewModelNotify()
+    {
+        var erros = ModelState.Values.SelectMany(v => v.Errors);
+        foreach (var erro in erros)
         {
-            Bus = bus;
-            Notifications = notifications;
+            var erroMsg = erro.Exception == null ? erro.ErrorMessage : erro.Exception.Message;
+            NotifyError(string.Empty, erroMsg);
         }
+    }
 
-        protected void InvalidViewModelNotify()
-        {
-            var erros = ModelState.Values.SelectMany(v => v.Errors);
-            foreach (var erro in erros)
-            {
-                var erroMsg = erro.Exception == null ? erro.ErrorMessage : erro.Exception.Message;
-                NotifyError(string.Empty, erroMsg);
-            }
-        }
+    protected void NotifyError(string codigo, string mensagem)
+    {
+        Bus.RaiseEvent(new DomainNotification(codigo, mensagem));
+    }
 
-        protected void NotifyError(string codigo, string mensagem)
-        {
-            Bus.RaiseEvent(new DomainNotification(codigo, mensagem));
-        }
+    protected IActionResult Response(object result = null)
+    {
+        return Response<object>(result);
+    }
 
-        protected IActionResult Response(object result = null)
+    protected IActionResult Response<T>(T result)
+    {
+        if (ValidOperation())
         {
-            return Response<object>(result);
+            return Ok(new ReturnContentJson<T>(true, result));
         }
+        return BadRequest(new ReturnContentJson<T>(false, result, Notifications.GetNotifications().Select(n => n.Value)));
+    }
 
-        protected IActionResult Response<T>(T result)
-        {
-            if (ValidOperation())
-            {
-                return Ok(new ReturnContentJson<T>(true, result));
-            }
-            return BadRequest(new ReturnContentJson<T>(false, result, Notifications.GetNotifications().Select(n => n.Value)));
-        }
-
-        protected bool ValidOperation()
-        {
-            return (!Notifications.HasNotifications());
-        }
+    protected bool ValidOperation()
+    {
+        return (!Notifications.HasNotifications());
     }
 }

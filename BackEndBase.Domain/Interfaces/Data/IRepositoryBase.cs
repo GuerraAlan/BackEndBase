@@ -3,26 +3,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace BackEndBase.Domain.Interfaces.Data
+namespace BackEndBase.Domain.Interfaces.Data;
+
+public interface IRepositoryBase<TEntity> : IDisposable where TEntity : Entity<TEntity>
 {
-    public interface IRepositoryBase<TEntity> : IDisposable where TEntity : Entity<TEntity>
-    {
-        void Add(TEntity obj);
+    void Add(TEntity obj);
 
-        TEntity GetById(Guid id, params Expression<Func<TEntity, object>>[] include);
+    TEntity GetById(Guid id, params Expression<Func<TEntity, object>>[] include);
 
-        ICollection<TEntity> GetAll(params Expression<Func<TEntity, object>>[] include);
+    ICollection<TEntity> GetAll(params Expression<Func<TEntity, object>>[] include);
 
-        ICollection<TEntity> Find(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] include);
+    ICollection<TEntity> Find(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] include);
 
-        TEntity Get(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] include);
+    TEntity Get(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] include);
 
-        void Update(TEntity obj);
+    void Update(TEntity obj);
 
-        void Remove(Guid id);
+    void Remove(Guid id);
 
-        void Remove(TEntity entity);
+    void Remove(TEntity entity);
 
-        void Save();
-    }
+    void Save();
 }

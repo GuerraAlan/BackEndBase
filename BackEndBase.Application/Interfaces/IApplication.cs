@@ -1,6 +1,5 @@
-﻿namespace BackEndBase.Application.Interfaces
+﻿namespace BackEndBase.Application.Interfaces;
+
+public interface IApplication
 {
-    public interface IApplication
-    {
-    }
 }

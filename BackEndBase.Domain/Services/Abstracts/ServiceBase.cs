@@ -4,33 +4,32 @@ using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 
-namespace BackEndBase.Domain.Services.Abstracts
+namespace BackEndBase.Domain.Services.Abstracts;
+
+public abstract class ServiceBase
 {
-    public abstract class ServiceBase
+    private readonly IBus _bus;
+
+    protected ServiceBase(IBus bus)
     {
-        private readonly IBus _bus;
+        _bus = bus;
+    }
 
-        protected ServiceBase(IBus bus)
+    protected void NotifyValidationError(ValidationResult validationResult)
+    {
+        foreach (var erro in validationResult.Errors)
         {
-            _bus = bus;
+            Console.WriteLine(erro.ErrorMessage);
+            _bus.RaiseEvent(new DomainNotification(erro.PropertyName, erro.ErrorMessage));
         }
+    }
 
-        protected void NotifyValidationError(ValidationResult validationResult)
-        {
-            foreach (var erro in validationResult.Errors)
-            {
-                Console.WriteLine(erro.ErrorMessage);
-                _bus.RaiseEvent(new DomainNotification(erro.PropertyName, erro.ErrorMessage));
-            }
-        }
+    protected void NotifyValidationError(string errorMessage)
+    {
+        var errors = new List<ValidationFailure> { new(null, errorMessage) };
 
-        protected void NotifyValidationError(string errorMessage)
-        {
-            var errors = new List<ValidationFailure> { new(null, errorMessage) };
+        var validationResult = new ValidationResult(errors);
 
-            var validationResult = new ValidationResult(errors);
-
-            NotifyValidationError(validationResult);
-        }
+        NotifyValidationError(validationResult);
     }
 }

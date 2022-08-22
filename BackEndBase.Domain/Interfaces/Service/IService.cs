@@ -1,6 +1,5 @@
-﻿namespace BackEndBase.Domain.Interfaces.Service
+﻿namespace BackEndBase.Domain.Interfaces.Service;
+
+public interface IService<TEntity>
 {
-    public interface IService<TEntity>
-    {
-    }
 }
