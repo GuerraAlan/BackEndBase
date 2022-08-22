@@ -12,10 +12,9 @@ services:
 
   web:
     container_name: 'api'
-    image: 'backendbase'
-    build: 
+    build:
       context: .
-      dockerfile: ./BackEndBase.Api/Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - '80:80'
       - '443:443'
@@ -24,7 +23,7 @@ services:
     depends_on:
       - 'postgres'
     networks:
-      - database-network    
+      - database-network
 
 networks:
   database-network:

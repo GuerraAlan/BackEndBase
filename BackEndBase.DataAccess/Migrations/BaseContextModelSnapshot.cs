@@ -3,8 +3,6 @@ using System;
 using BackEndBase.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEndBase.DataAccess.Migrations
 {
@@ -30,9 +28,6 @@ namespace BackEndBase.DataAccess.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("dt_birthDate");
-
-                    b.Property<int>("CascadeMode")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Email")
                         .IsRequired()

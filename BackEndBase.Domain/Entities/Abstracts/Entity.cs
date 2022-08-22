@@ -1,20 +1,11 @@
-﻿using FluentValidation;
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 
 namespace BackEndBase.Domain.Entities.Abstracts
 {
-    public abstract class Entity<T> : AbstractValidator<T> where T : Entity<T>
+    public abstract class Entity<T>
     {
-        protected Entity()
-        {
-            ValidationResult = new FluentValidation.Results.ValidationResult();
-        }
 
         public Guid Id { get; protected set; }
-
-        [NotMapped]
-        public FluentValidation.Results.ValidationResult ValidationResult { get; protected set; }
 
         public override bool Equals(object obj)
         {
