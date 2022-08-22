@@ -33,9 +33,6 @@ namespace BackEndBase.DataAccess.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("dt_birthDate");
 
-                    b.Property<int>("CascadeMode")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text")

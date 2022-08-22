@@ -20,8 +20,7 @@ namespace BackEndBase.DataAccess.Migrations
                     dt_birthDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     nr_phone = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false),
                     st_email = table.Column<string>(type: "text", nullable: false),
-                    hs_password = table.Column<string>(type: "text", nullable: false),
-                    CascadeMode = table.Column<int>(type: "integer", nullable: false)
+                    hs_password = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

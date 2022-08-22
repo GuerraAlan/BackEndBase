@@ -45,8 +45,7 @@ namespace BackEndBase.Api.Controllers.Abstracts
             {
                 return Ok(new ReturnContentJson<T>(true, result));
             }
-            var instance = Activator.CreateInstance<T>();
-            return BadRequest(new ReturnContentJson<T>(false, instance, Notifications.GetNotifications().Select(n => n.Value)));
+            return BadRequest(new ReturnContentJson<T>(false, result, Notifications.GetNotifications().Select(n => n.Value)));
         }
 
         protected bool ValidOperation()
