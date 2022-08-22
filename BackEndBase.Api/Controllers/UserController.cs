@@ -6,45 +6,44 @@ using BackEndBase.Domain.Interfaces.Notifications;
 using BackEndBase.Domain.Notifications;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BackEndBase.Api.Controllers
+namespace BackEndBase.Api.Controllers;
+
+[Route("api/v1/User")]
+public class UserController : BaseController
 {
-    [Route("api/v1/User")]
-    public class UserController : BaseController
+    private readonly IUserApplication _userApplication;
+
+    public UserController(IBus bus, IDomainNotificationHandler<DomainNotification> notifications, IUserApplication userApplication) : base(bus, notifications)
     {
-        private readonly IUserApplication _userApplication;
+        _userApplication = userApplication;
+    }
 
-        public UserController(IBus bus, IDomainNotificationHandler<DomainNotification> notifications, IUserApplication userApplication) : base(bus, notifications)
+    [HttpPost]
+    public IActionResult AddUser([FromBody] RegisterUserViewModel usuarioViewModel)
+    {
+        if (!ModelState.IsValid)
         {
-            _userApplication = userApplication;
+            InvalidViewModelNotify();
+            return Response();
         }
 
-        [HttpPost]
-        public IActionResult AddUser([FromBody] RegisterUserViewModel usuarioViewModel)
+        _userApplication.AddUser(usuarioViewModel);
+
+        return Response(true);
+    }
+
+    [HttpPost]
+    [Route("Login")]
+    public IActionResult Authenticate([FromBody] LoginViewModel model)
+    {
+        if (!ModelState.IsValid)
         {
-            if (!ModelState.IsValid)
-            {
-                InvalidViewModelNotify();
-                return Response();
-            }
-
-            _userApplication.AddUser(usuarioViewModel);
-
-            return Response(true);
+            InvalidViewModelNotify();
+            return Response();
         }
 
-        [HttpPost]
-        [Route("Login")]
-        public IActionResult Authenticate([FromBody] LoginViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                InvalidViewModelNotify();
-                return Response();
-            }
+        var userToken = _userApplication.Authenticate(model);
 
-            var userToken = _userApplication.Authenticate(model);
-
-            return Response(userToken);
-        }
+        return Response(userToken);
     }
 }

@@ -2,20 +2,19 @@
 using BackEndBase.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackEndBase.DataAccess.Context
+namespace BackEndBase.DataAccess.Context;
+
+public class BaseContext : DbContext
 {
-    public class BaseContext : DbContext
+    public DbSet<User> Users { get; set; }
+
+    public BaseContext(DbContextOptions<BaseContext> options) : base(options)
     {
-        public DbSet<User> Users { get; set; }
+    }
 
-        public BaseContext(DbContextOptions<BaseContext> options) : base(options)
-        {
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.HasDefaultSchema("BackEndBase");
-            modelBuilder.ApplyConfiguration(new UserMap());
-        }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("BackEndBase");
+        modelBuilder.ApplyConfiguration(new UserMap());
     }
 }

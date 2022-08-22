@@ -1,9 +1,8 @@
 ﻿using BackEndBase.Domain.Entities;
 
-namespace BackEndBase.Domain.Interfaces.Services
+namespace BackEndBase.Domain.Interfaces.Services;
+
+public interface ITokenService
 {
-    public interface ITokenService
-    {
-        public string GenerateToken(User user);
-    }
+    public string GenerateToken(User user);
 }

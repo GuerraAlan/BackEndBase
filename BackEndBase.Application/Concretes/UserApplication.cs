@@ -6,26 +6,25 @@ using BackEndBase.Domain.Commands;
 using BackEndBase.Domain.Interfaces.Services;
 using Mapster;
 
-namespace BackEndBase.Application.Concretes
+namespace BackEndBase.Application.Concretes;
+
+public class UserApplication : ApplicationBase, IUserApplication
 {
-    public class UserApplication : ApplicationBase, IUserApplication
+    private readonly IUserService _userService;
+
+    public UserApplication(IBus bus, IUserService userService) : base(bus)
     {
-        private readonly IUserService _userService;
+        _userService = userService;
+    }
 
-        public UserApplication(IBus bus, IUserService userService) : base(bus)
-        {
-            _userService = userService;
-        }
+    public void AddUser(RegisterUserViewModel registerUserViewModel)
+    {
+        var command = registerUserViewModel.Adapt<AddUserCommand>();
+        SendCommand(command);
+    }
 
-        public void AddUser(RegisterUserViewModel registerUserViewModel)
-        {
-            var command = registerUserViewModel.Adapt<AddUserCommand>();
-            SendCommand(command);
-        }
-
-        public string Authenticate(LoginViewModel loginViewModel)
-        {
-            return _userService.Authenticate(loginViewModel.Email, loginViewModel.PasswordHash);
-        }
+    public string Authenticate(LoginViewModel loginViewModel)
+    {
+        return _userService.Authenticate(loginViewModel.Email, loginViewModel.PasswordHash);
     }
 }
